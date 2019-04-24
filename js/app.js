@@ -1,14 +1,13 @@
 'use strict';
 
-//list of images
-
 //Constructor
 function Image(pic){
   this.image_url = pic.image_url;
   this.title = pic.title;
   this.description = pic.description;
-  this.keyword = pic.keyWord;
+  this.keyword = pic.keyword;
   this.horns = pic.horns;
+
 }
 
 Image.allImages = [];
@@ -21,6 +20,8 @@ function createImageObject(){
     .then(data => {
       data.forEach(picElement => Image.allImages.push(new Image(picElement)));
       displayImages();
+      fillSelect();
+      filterImages();
     });
 
   // console.log(Image.allImages);
@@ -31,18 +32,52 @@ function displayImages(){
   //get the image element
   let imageTag = $('img');
   //assign the first image object to the first image tag
-  imageTag.attr({'src': Image.allImages[0].image_url, 'alt': Image.allImages[0].title});
+  imageTag.attr({'src': Image.allImages[0].image_url, 'alt': Image.allImages[0].title, 'class': Image.allImages[0].keyword});
   // iterate through the images list  and create image tags
 
   for(let i = 1; i < Image.allImages.length; i++){
-    imageTag.after(`<img src=${Image.allImages[i].image_url} alt=${Image.allImages[i].title} />`);
+    imageTag.after(`<img src=${Image.allImages[i].image_url} alt=${Image.allImages[i].title}, class: ${Image.allImages[i].keyword}} />`);
+
   }
+
 }
+
+//Fill in select options
+function fillSelect(){
+  let options = [];
+  let selectTag = $('select');
+  // let optionItems = getKeyWords();
+  for(let i = 0; i < Image.allImages.length; i++){
+    if(!options.includes(Image.allImages[i].keyword)){
+      //Add option tag
+      selectTag.append(`<option value=${Image.allImages[i].keyword}>${Image.allImages[i].keyword}</option>`);
+
+      //Add to list of options array
+      options.push(Image.allImages[i].keyword);
+    }
+  }
+
+}
+
+//Function to filter images
+function filterImages(){
+  $('select').change(function(){
+    let selectedKey = $(this).children('option:selected').val();
+    $('img').remove();
+    for(let i = 0; i < Image.allImages.length; i++){
+      if(Image.allImages[i].keyword === selectedKey){
+        $('h2').after(`<img src=${Image.allImages[i].image_url} alt=${Image.allImages[i].title}, class: ${Image.allImages[i].keyword}} />`);
+      }
+    }
+  
+  });
+}
+
 
 
 // FUNCTION CALLS
 createImageObject();
 
-console.log(Image.allImages);
+
 
 
