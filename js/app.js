@@ -62,8 +62,11 @@ function fillSelect(){
 //Function to filter images
 function filterImages(){
   $('select').change(function(){
+    // get value for selected keyword
     let selectedKey = $(this).children('option:selected').val();
+    //remove all images
     $('img').remove();
+    // display all images based from the keyword
     for(let i = 0; i < Image.allImages.length; i++){
       if(Image.allImages[i].keyword === selectedKey){
         $('h2').after(`<img src=${Image.allImages[i].image_url} alt=${Image.allImages[i].title}, class: ${Image.allImages[i].keyword}} />`);
