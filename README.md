@@ -1,4 +1,4 @@
-# lab-02-repositary
+# 301 Lab-02 Repository
 
 This is a pair programming lab done completed by:
 Sudip Adhikari
