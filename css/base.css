@@ -1,9 +1,14 @@
 @import 'reset.css';
 
+body{
+width: 960px;
+margin: 0 auto;
+background: blanchedalmond;
+}
+
 img{
   width: 200px;
   height: 200px;
-  float: left;
   border: 5px solid lightblue;
   margin: 15px;
 }
@@ -12,32 +17,17 @@ h1{
   font-family: 'Gloria Hallelujah', cursive;
   font-size: 40px;
   color: white;
-  
 }
 
-header{
-  background-color: blue;
-  text-align: center;
-  margin: 30px auto;
-}
-
-footer{
-  clear: both;
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  background-color:blue;
-  color: white;
-  text-align: center;
-  height: 40px;
-  margin-top: 50px;
-  line-height: 40px;
-}
 
 section{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   margin: 30px auto;
-  overflow: auto;
-  
+  overflow: auto; 
 }
 
+img:hover {
+  opacity: .5;
+}
